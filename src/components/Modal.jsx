@@ -1,30 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import styles from './Modal.module.css';
 
 const Modal = ({ imageUrl, onClose }) => {
-  const modalRef = useRef(null);
-
-  useEffect(() => {
-    const handleKeyDown = event => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [onClose]);
-
   return (
     <div className={styles.Overlay} onClick={onClose}>
-      <div
-        className={styles.Modal}
-        ref={modalRef}
-        onClick={e => e.stopPropagation()}
-      >
+      <div className={styles.Modal}>
         <img src={imageUrl} alt="" />
       </div>
     </div>
