@@ -12,10 +12,6 @@ const Searchbar = ({ onSubmit }) => {
     setInputValue('');
   };
 
-  const handleClear = () => {
-    setInputValue('');
-  };
-
   return (
     <header className={styles.Searchbar}>
       <form className={styles.SearchForm} onSubmit={handleSubmit}>
@@ -35,14 +31,6 @@ const Searchbar = ({ onSubmit }) => {
           autoFocus
           placeholder="Search images and photos"
         />
-        <button
-          type="button"
-          className={styles.ClearButton}
-          onClick={handleClear}
-          aria-label="Clear"
-        >
-          Clear
-        </button>
       </form>
     </header>
   );
