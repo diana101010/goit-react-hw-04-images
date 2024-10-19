@@ -1,60 +1,20 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import ImageGalleryItem from './ImageGalleryItem';
-import styles from './ImageGallery.module.css';
+import React, { useEffect } from 'react';
+import styles from './ImageGalleryItem.module.css';
 
-const ImageGallery = ({ images, onImageClick }) => {
-  const [selectedImage, setSelectedImage] = useState(null);
+const ImageGalleryItem = ({ image, onImageClick }) => {
+  useEffect(() => {
+    console.log('Image object changed:', image);
+  }, [image]);
 
-  const handleImageClick = image => {
-    if (selectedImage === image) {
-      setSelectedImage(null);
-    } else {
-      setSelectedImage(image);
-      if (onImageClick) {
-        onImageClick(image);
-      }
-    }
+  const handleClick = () => {
+    onImageClick(image.largeImageURL);
   };
 
   return (
-    <>
-      <ul className={styles.ImageGallery}>
-        {images.map(image => (
-          <ImageGalleryItem
-            key={image.id}
-            image={image}
-            onImageClick={() => handleImageClick(image)}
-            className={`${styles.ImageGalleryItem} ${
-              styles[`Item-${image.id}`]
-            }`}
-          />
-        ))}
-      </ul>
-      {selectedImage && (
-        <div className={styles.SelectedImageContainer}>
-          <h2>{selectedImage.title}</h2>
-          <img
-            src={selectedImage.url}
-            alt={selectedImage.title}
-            className={styles.SelectedImage}
-          />
-          <button onClick={() => setSelectedImage(null)}>Close</button>
-        </div>
-      )}
-    </>
+    <li className={styles.ImageGalleryItem} onClick={handleClick}>
+      <img src={image.webformatURL} alt={image.tags} />
+    </li>
   );
 };
 
-ImageGallery.propTypes = {
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  onImageClick: PropTypes.func,
-};
-
-export default ImageGallery;
+export default ImageGalleryItem;
