@@ -28,7 +28,7 @@ const App = () => {
       setImages(prevImages => [...prevImages, ...response.data.hits]);
     } catch (error) {
       console.error('Error fetching images:', error);
-      alert('Failed to fetch images. Please try again later.');
+      alert('Failed to fetch images. Please try again later.'); // Error handling
     } finally {
       setLoading(false);
     }
