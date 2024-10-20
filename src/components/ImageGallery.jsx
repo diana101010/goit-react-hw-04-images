@@ -16,5 +16,5 @@ const ImageGallery = ({ images, onImageClick }) => {
     </ul>
   );
 };
-
+//list
 export default ImageGallery;
